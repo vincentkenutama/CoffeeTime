@@ -1,11 +1,15 @@
 package vkenutama.iot.coffeetime
 
 import android.content.ContentValues.TAG
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
@@ -30,21 +35,29 @@ import com.google.firebase.database.getValue
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import vkenutama.iot.coffeetime.Data.ViewModel.UserViewModel
+import vkenutama.iot.coffeetime.UserInterface.screen.LoginPage
 import vkenutama.iot.coffeetime.Util.Database
 import vkenutama.iot.coffeetime.ui.theme.CoffeeTimeTheme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         enableEdgeToEdge()
         setContent {
+
+
             CoffeeTimeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    LoginPage(
                         modifier = Modifier.padding(innerPadding)
                     )
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
                 }
             }
         }
@@ -140,7 +153,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
         Button(onClick = { coroutineScope.launch {
             val db =  Database(CobaUser::class.java)
-            users = db.getAllData("users") as MutableList<CobaUser>
+            users = db.selectAll("users") as MutableList<CobaUser>
         }
         }) {
             Text(text = "Read")
@@ -149,7 +162,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Button(onClick = {println(users)}) {
             Text(text = "Print")
         }
-
+        
+        Image(painter = painterResource(id = R.drawable.header), contentDescription = null)
     }
 
 }
