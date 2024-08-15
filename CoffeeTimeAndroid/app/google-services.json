@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "501620538965",
+    "firebase_url": "https://coffeetime-090903-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "coffeetime-090903",
+    "storage_bucket": "coffeetime-090903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501620538965:android:ef7adc11ee84d048469edc",
+        "android_client_info": {
+          "package_name": "vkenutama.iot.coffeetime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD18W8TRQanZFXfybvdtzsshD_TlWsXZhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
