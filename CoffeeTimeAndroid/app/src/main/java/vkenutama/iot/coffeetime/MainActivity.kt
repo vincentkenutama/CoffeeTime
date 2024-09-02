@@ -25,6 +25,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DataSnapshot
@@ -36,7 +38,8 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import vkenutama.iot.coffeetime.Data.ViewModel.UserViewModel
-//import vkenutama.iot.coffeetime.UserInterface.screen.LoginPage
+import vkenutama.iot.coffeetime.UserInterface.screen.AppNavHost
+import vkenutama.iot.coffeetime.UserInterface.screen.LoginPage
 import vkenutama.iot.coffeetime.UserInterface.screen.SignUpPage
 import vkenutama.iot.coffeetime.Util.Database
 import vkenutama.iot.coffeetime.ui.theme.CoffeeTimeTheme
@@ -48,16 +51,23 @@ class MainActivity : ComponentActivity() {
         FirebaseApp.initializeApp(this)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
+
 
 
             CoffeeTimeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    AppNavHost(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = navController
+                        )
+
 //                    LoginPage(
 //                        modifier = Modifier.padding(innerPadding)
 //                    )
-                    SignUpPage(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+//                    SignUpPage(
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
 //                    Greeting(
 //                        name = "Android",
 //                        modifier = Modifier.padding(innerPadding)

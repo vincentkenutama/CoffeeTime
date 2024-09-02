@@ -39,6 +39,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.firestore
@@ -61,7 +63,8 @@ import java.util.Date
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignUpPage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController = rememberNavController()
 ){
 
     var fullName by remember { mutableStateOf("")}
@@ -332,7 +335,7 @@ fun SignUpPage(
             Text(text = "Sign In",
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable {
-                    verifyUserInformation(Users())
+                    navController.navigate(NavigationItem.LoginScreen.route)
                 })
         }
 

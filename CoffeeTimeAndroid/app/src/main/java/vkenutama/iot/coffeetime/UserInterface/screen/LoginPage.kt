@@ -30,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import vkenutama.iot.coffeetime.Data.Model.UserField
 import vkenutama.iot.coffeetime.Data.ViewModel.UserViewModel
 import vkenutama.iot.coffeetime.R
@@ -40,7 +42,8 @@ import vkenutama.iot.coffeetime.Util.toDp
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun LoginPage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController = rememberNavController()
 ){
 
     val userViewModels: UserViewModel = viewModel()
@@ -122,9 +125,11 @@ fun LoginPage(
                 Text(text = "Sign Up",
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.clickable {  })
+                    modifier = Modifier.clickable {
+                        navController.navigate(NavigationItem.SignUpScreen.route)
+                    })
 
-                Text(text = "-> ${userViewModels.user.value.username ?: ""}")
+//                Text(text = "-> ${userViewModels.user.value.username ?: ""}")
             }
         }
 
