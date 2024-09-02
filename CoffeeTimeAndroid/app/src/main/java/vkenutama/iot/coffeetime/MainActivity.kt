@@ -36,7 +36,8 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import vkenutama.iot.coffeetime.Data.ViewModel.UserViewModel
-import vkenutama.iot.coffeetime.UserInterface.screen.LoginPage
+//import vkenutama.iot.coffeetime.UserInterface.screen.LoginPage
+import vkenutama.iot.coffeetime.UserInterface.screen.SignUpPage
 import vkenutama.iot.coffeetime.Util.Database
 import vkenutama.iot.coffeetime.ui.theme.CoffeeTimeTheme
 
@@ -51,7 +52,10 @@ class MainActivity : ComponentActivity() {
 
             CoffeeTimeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LoginPage(
+//                    LoginPage(
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+                    SignUpPage(
                         modifier = Modifier.padding(innerPadding)
                     )
 //                    Greeting(
