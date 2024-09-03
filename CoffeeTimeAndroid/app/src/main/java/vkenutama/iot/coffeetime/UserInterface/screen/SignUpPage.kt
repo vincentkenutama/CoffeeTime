@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,6 +48,9 @@ import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.firestore.toObject
 import com.google.firebase.firestore.toObjects
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import vkenutama.iot.coffeetime.Data.Model.Gender
@@ -80,7 +84,7 @@ fun SignUpPage(
     var validationMessage by remember { mutableStateOf("") }
     var registrationSuccess by remember{ mutableStateOf(false) }
 
-    val allUser : MutableList<Users> = mutableListOf()
+    val coroutineScope = rememberCoroutineScope()
 
     val topPadding: Double = 100.0
     val formPadding: Double = 50.0
@@ -169,6 +173,11 @@ fun SignUpPage(
                 addUserToDatabase(userInformation)
                 registrationSuccess = true
                 Log.d(TAG, "Added to database")
+
+                coroutineScope.launch{
+                    delay(2000)
+                    navController.navigate(NavigationItem.LoginScreen.route)
+                }
             }
 
             else
@@ -304,7 +313,7 @@ fun SignUpPage(
                         name = fullName,
                         email = email,
                         dateOfBirth = "",
-                        hashedPassword = Encryption().applyHash("a"),
+                        hashedPassword = Encryption().applyHash(password),
                         password = "",
                         gender = Gender.NOT_SPECIFIED
                     )

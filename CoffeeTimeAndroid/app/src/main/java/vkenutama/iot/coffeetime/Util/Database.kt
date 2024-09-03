@@ -5,6 +5,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
 
+
 class Database<T>(
     private val classType: Class<T>
 ) {

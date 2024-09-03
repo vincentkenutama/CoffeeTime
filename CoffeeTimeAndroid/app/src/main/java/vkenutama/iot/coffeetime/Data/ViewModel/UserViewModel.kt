@@ -1,5 +1,7 @@
 package vkenutama.iot.coffeetime.Data.ViewModel
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -13,18 +15,31 @@ import vkenutama.iot.coffeetime.Data.Model.Users
 import java.time.LocalDate
 
 class UserViewModel : ViewModel() {
+    @RequiresApi(Build.VERSION_CODES.O)
     private val _user = MutableStateFlow(Users())
 
     private val _username = mutableStateOf("")
 
     val username: MutableState<String> = _username
 
+    @RequiresApi(Build.VERSION_CODES.O)
     val user:StateFlow<Users> = _user.asStateFlow()
 
     fun setUsername(updatedValue: String){
         _username.value = updatedValue
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getUsername(): String{
+        return _user.value.username
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getPassword(): String{
+        return _user.value.password
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateUsername(updatedValue: String){
         _user.update {
             currentState ->
@@ -34,6 +49,7 @@ class UserViewModel : ViewModel() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updatePasswordField(updateValue: String){
         _user.update{
             curr ->
